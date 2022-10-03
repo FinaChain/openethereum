@@ -94,19 +94,19 @@ impl ValidatorContract {
     }
 
     fn do_report_benign(&self, address: &Address, block: BlockNumber) -> Result<(), EthcoreError> {
-        let client = self
-            .client
-            .read()
-            .as_ref()
-            .and_then(Weak::upgrade)
-            .ok_or("No client!")?;
-        let latest = client
-            .block_header(BlockId::Latest)
-            .ok_or("No latest block!")?;
-        let data = validator_report::functions::report_benign::encode_input(*address, block);
-        let gas_price = self.report_gas_price(latest.number());
-        self.transact(data, gas_price, &*client)?;
-        warn!(target: "engine", "Benign report for validator {} at block {}", address, block);
+        //let client = self
+        //    .client
+        //    .read()
+        //    .as_ref()
+        //    .and_then(Weak::upgrade)
+        //    .ok_or("No client!")?;
+        //let latest = client
+        //    .block_header(BlockId::Latest)
+        //    .ok_or("No latest block!")?;
+        //let data = validator_report::functions::report_benign::encode_input(*address, block);
+        //let gas_price = self.report_gas_price(latest.number());
+        //self.transact(data, gas_price, &*client)?;
+        //warn!(target: "engine", "Benign report for validator {} at block {}", address, block);
         Ok(())
     }
 
