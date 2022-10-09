@@ -398,9 +398,11 @@ where
         .percentile(percentile)
         .cloned()
         .unwrap_or_else(|| miner.sensible_gas_price());
-		
-	if gas_price < 20_000_000_000 {
-		20_000_000_000
+
+    let min_gas_price = U256::from(1100000000u32);
+
+	if gas_price < min_gas_price {
+		min_gas_price
 	} else {
 		gas_price
 	}
