@@ -393,11 +393,17 @@ where
     C: BlockChainClient,
     M: MinerService,
 {
-    client
+    let gas_price = client
         .gas_price_corpus(100)
         .percentile(percentile)
         .cloned()
-        .unwrap_or_else(|| miner.sensible_gas_price())
+        .unwrap_or_else(|| miner.sensible_gas_price());
+		
+	if gas_price < 20_000_000_000 {
+		20_000_000_000
+	} else {
+		gas_price
+	}
 }
 
 /// Extract the default priority gas price from a client and miner.
